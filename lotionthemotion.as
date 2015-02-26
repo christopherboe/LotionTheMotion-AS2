@@ -4,20 +4,18 @@ import com.greensock.easing.*;
 
 //ENDRE EFFEKT OG TID PÅ BANNER
 
-freezeIt = 5; // Definer antall sekunder hver slide skal stå stille.
+freezeIt = 4; // Definer antall sekunder hver slide skal stå stille.
 hastighet = 1; // Definer hvor lang tid (sekunder) hver overgang skal ta.
-animEffect = Quad; // Velg effect: Quad, Elastic, Bounce
-easeEffect = easeOut; // Velg Ease: easeIn, easeOut, easeInOut
-
-//Se flere effekter på GSAP sine nettsider
 
 
-slide1Pos = slide1._x;
-slide2Pos = slide2._x;
+
+trace(_root.freezeIt);
+slide1Pos = slide1._y;
+slide2Pos = slide2._y;
 
 
-xPos = startPos._x;
-xPosEnd=endPos._x;
+yPos = startPos._y;
+yPosEnd=endPos._y;
 
 startPos._alpha = 0;
 endPos._alpha = 0;
@@ -25,22 +23,22 @@ endPos._alpha = 0;
 
 function kickOFFtheShit() {
    stop();
-   var mxInterval = setInterval(function () {
+   var myInterval = setInterval(function () {
       animerUt();
 	  resetSlide2();
 	  animerInn2();
-      clearInterval(mxInterval);
+      clearInterval(myInterval);
    }, freezeIt*1000);
    animerInn();
 }
 
 function repeatSlides() {
    stop();
-   var mxInterval = setInterval(function () {
+   var myInterval = setInterval(function () {
       animerUt2();
 	  resetSlide1();
 	  kickOFFtheShit();
-      clearInterval(mxInterval);
+      clearInterval(myInterval);
    }, freezeIt*1000);
 
 }
@@ -48,14 +46,14 @@ function repeatSlides() {
 
 function resetSlide1(){
 
-	slide1._x=xPos;
+	slide1._y=yPos;
 	slide1._alpha=0;
 
 }
 
 function resetSlide2(){
 
-	slide2._x = xPos;
+	slide2._y = yPos;
 	slide2._alpha=0;
 
 }
@@ -63,22 +61,21 @@ function resetSlide2(){
 
 
 function animerInn(){
-	TweenLite.to(slide1, hastighet, {_x:slide1Pos,_alpha:100, /*_x:101,*/ ease:animEffect.easeEffect});
+	TweenLite.to(slide1, hastighet, {_y:slide1Pos,_alpha:100, /*_y:101,*/ ease:Elastic.easeInOut});
 }
 
 function animerInn2(){
-	TweenLite.to(slide2, hastighet, {_x:slide2Pos,_alpha:100, /*_x:101,*/ ease:animEffect.easeEffect});
+	TweenLite.to(slide2, hastighet, {_y:slide2Pos,_alpha:100, /*_y:101,*/ ease:Elastic.easeInOut});
 }
 
 function animerUt(){
-	TweenLite.to(slide1, hastighet, {_x:xPosEnd,_alpha:0, /*_x:101,*/ ease:animEffect.easeEffect});
-
+	TweenLite.to(slide1, hastighet, {_y:yPosEnd,_alpha:0, /*_y:101,*/ ease:Elastic.easeInOut});
 	repeatSlides();
 	
 }
 
 function animerUt2(){
-	TweenLite.to(slide2, hastighet, {_x:xPosEnd,_alpha:0, /*_x:101,*/ ease:animEffect.easeEffect});
+	TweenLite.to(slide2, hastighet, {_y:yPosEnd,_alpha:0, /*_y:101,*/ ease:Elastic.easeInOut});
 }
 
 
